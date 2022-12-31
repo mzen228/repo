@@ -32,14 +32,8 @@ void TicTacToe::checkDraw() {
 
 bool TicTacToe::endGame() {
 
-	checkDraw();
-
-	if (isDraw) {
-		std::cout << "\nDraw!\n";
-		return true;
-	}
 	// all possible ways to win a tic tac toe game
-	// 
+	
 	// top row
 	if (playingBoard.at(0).at(0) == playingBoard.at(0).at(1) && 
 		playingBoard.at(0).at(0) == playingBoard.at(0).at(2) && 
@@ -96,6 +90,14 @@ bool TicTacToe::endGame() {
 		getWinner();
 		return true;
 	}
+
+	checkDraw();
+
+	if (isDraw) {
+		std::cout << "\nDraw!\n";
+		return true;
+	}
+
 	player++;
 	return 0;
 }
