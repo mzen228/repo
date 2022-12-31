@@ -21,7 +21,23 @@ int TicTacToe::getWinner() {
 	return winner;
 }
 
+void TicTacToe::checkDraw() {
+
+	for (size_t i{}; i < playingBoard.size(); ++i)
+		for (size_t j{}; j < playingBoard.size(); ++j)
+			if (playingBoard.at(i).at(j) == '*')
+				return;
+	isDraw = true;
+}
+
 bool TicTacToe::endGame() {
+
+	checkDraw();
+
+	if (isDraw) {
+		std::cout << "\nDraw!\n";
+		return true;
+	}
 	// all possible ways to win a tic tac toe game
 	// 
 	// top row
@@ -89,9 +105,6 @@ void TicTacToe::getRowAndCol() {
 		std::cout << "Enter the row and col separated by spaces: ";
 		std::cin >> row >> col;
 
-		if (playingBoard.at(row).at(col)!='*')
-			std::cout << "Invalid.\n";
-
 		if (row > 2 || row < 0) {
 			std::cout << "Invalid row entry.\n";
 		}
@@ -99,7 +112,11 @@ void TicTacToe::getRowAndCol() {
 		if (col > 2 || col < 0) {
 			std::cout << "Invalid col entry.\n";
 		}
-	} while (row > 2 || row < 0 || col>2 || col < 0 || playingBoard.at(row).at(col)!='*');
+
+		if (playingBoard[row][col] != '*')
+			std::cout << "Invalid.\n";
+
+	} while (row > 2 || row < 0 || col>2 || col < 0 || playingBoard[row][col] != '*');
 }
 
 void TicTacToe::playerTurn() {
