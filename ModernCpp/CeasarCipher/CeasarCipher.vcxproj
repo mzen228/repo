@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{04e1d4f0-dfa2-4fbb-b841-49cb61a7d4b4}</ProjectGuid>
+    <ProjectGuid>{980ffbab-913a-41d8-a221-9857b9296840}</ProjectGuid>
     <RootNamespace>CeasarCipher</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
