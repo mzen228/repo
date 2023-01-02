@@ -3,7 +3,7 @@ Confirm GPU results with CPU results*/
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-#include "common_functions.h"
+#include "cuda_common.h"
 #include <stdio.h>
 
 // for random initialize
@@ -41,6 +41,7 @@ void compare_arrays(int* a, int* b, int size) {
 }
 
 int main() {
+	helloWorld();
 	int size = 10000;
 	int block_size = 128;
 
@@ -73,9 +74,9 @@ int main() {
 
 	// device pointer
 	int* d_a, * d_b, * d_c;
-	cudaMalloc((int**)&d_a, NO_BYTES);
-	cudaMalloc((int**)&d_b, NO_BYTES);
-	cudaMalloc((int**)&d_c, NO_BYTES);
+	gpuErrchk(cudaMalloc((int**)&d_a, NO_BYTES));
+	gpuErrchk(cudaMalloc((int**)&d_b, NO_BYTES));
+	gpuErrchk(cudaMalloc((int**)&d_c, NO_BYTES));
 
 	// memory transfer from host to device 
 	cudaMemcpy(d_a, h_a, NO_BYTES, cudaMemcpyHostToDevice);
