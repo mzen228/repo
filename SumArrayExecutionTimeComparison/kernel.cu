@@ -14,8 +14,6 @@ Confirm GPU results with CPU results*/
 #include <cstring>
 
 int main() {
-	//int size = 10000;
-	//int block_size = 128;
 	int size = 1 << 25;
 	int block_size = 1024;
 
