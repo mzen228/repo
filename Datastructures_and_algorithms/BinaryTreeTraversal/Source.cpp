@@ -7,58 +7,66 @@ struct Node {
 	Node(int d) :data{ d }, rchild{ nullptr }, lchild{ nullptr } {}
 };
 
-void preorder(Node* p) {
+void preorder(Node* root) {
 
-	if (!p)
+	if (!root)
 		return;
 	
-	std::cout << p->data << ' ';
+	std::cout << root->data << ", ";
 
-	preorder(p->lchild);
+	preorder(root->lchild);
 
-	preorder(p->rchild); 
+	preorder(root->rchild); 
 }
 
-void inorder(Node* p) {
+void inorder(Node* root) {
 
-	if (!p)
+	if (!root)
 		return;
 
-	inorder(p->lchild);
+	inorder(root->lchild);
 
-	std::cout << p->data << ' ';
+	std::cout << root->data << ", ";
 
-	inorder(p->rchild);
+	inorder(root->rchild);
 }
 
-void postorder(Node* p) {
+void postorder(Node* root) {
 
-	if (!p)
+	if (!root)
 		return;
 
-	postorder(p->lchild);
+	postorder(root->lchild);
 
-	postorder(p->rchild);
+	postorder(root->rchild);
 
-	std::cout << p->data << ' ';
+	std::cout << root->data << ", ";
+}
+
+void btTraversals(Node* root) {
+	std::cout << "Preorder traversal: ";
+	preorder(root);
+	std::cout << std::endl;
+
+	std::cout << "Postorder traversal: ";
+	postorder(root);
+	std::cout << std::endl;
+
+	std::cout << "Inorder traversal: ";
+	inorder(root);
+	std::cout << std::endl;
 }
 
 int main() {
 	Node* root = new Node(1);
 	root->lchild = new Node(2);
 	root->rchild = new Node(3); 
+	root->lchild->lchild = new Node(4);
+	root->lchild->rchild = new Node(5);
+	root->rchild->lchild = new Node(6);
+	root->rchild->rchild = new Node(7);
 
-	std::cout << "Preorder traversal: ";
-	preorder(root);
-	std::cout << std::endl;
-
-	std::cout << "Inorder traversal: ";
-	inorder(root);
-	std::cout << std::endl;
-
-	std::cout << "Postorder traversal: ";
-	postorder(root);
-	std::cout << std::endl;
+	btTraversals(root);
 
 	return 0;
 }
