@@ -2,18 +2,21 @@
 #include <iostream>
 
 void printPrimes(int n) {
-	
+
 	int nfactors{};
+	static int n_computations{};
 
 	std::cout << "\nPrime numbers from 1 to " << n << ": " << std::endl;
 
-	for (size_t i{ 1 }; i <= n; ++i) {
-		for (size_t j{ 1 }; j <= i; ++j) {
-			if (i % j == 0)
+	for (size_t i{ 2 }; i <= n; ++i) {
+		for (size_t j{ 2 }; j <= i/2; ++j) {
+			if (i % j == 0) {
 				nfactors++;
+				n_computations++;
+			}
 		}
 
-		if (nfactors == 2)
+		if (nfactors == 0)
 			std::cout << i << ", ";
 
 		nfactors = 0;
