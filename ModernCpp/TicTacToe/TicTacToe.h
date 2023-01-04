@@ -25,5 +25,6 @@ public:
 	void draw();
 	void checkDraw();
 	void updateBoard();
+	void uniqueMove();
 };
 

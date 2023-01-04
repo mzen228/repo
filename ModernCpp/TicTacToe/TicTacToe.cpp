@@ -107,18 +107,27 @@ void TicTacToe::getRowAndCol() {
 		std::cout << "Enter the row and col separated by spaces: ";
 		std::cin >> row >> col;
 
+		validCol = true;
+		validRow = true;
+
 		if (row > 2 || row < 0) {
 			std::cout << "Invalid row entry.\n";
+			validRow = false;
 		}
 
 		if (col > 2 || col < 0) {
 			std::cout << "Invalid col entry.\n";
+			validCol = false;
 		}
 
-		if (playingBoard[row][col] != '*')
-			std::cout << "Invalid.\n";
+	} while (!validRow || !validCol);
+}
 
-	} while (row > 2 || row < 0 || col>2 || col < 0 || playingBoard[row][col] != '*');
+void TicTacToe::uniqueMove() {
+	while (playingBoard.at(row).at(col) != '*') {
+		std::cout << "Invalid move.\n";
+		getRowAndCol();
+	}
 }
 
 void TicTacToe::playerTurn() {
@@ -130,7 +139,7 @@ void TicTacToe::playerTurn() {
 	}
 
 	getRowAndCol();
-
+	uniqueMove();
 	updateBoard();
 }
 
