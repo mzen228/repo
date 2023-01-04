@@ -132,10 +132,10 @@ void TicTacToe::uniqueMove() {
 
 void TicTacToe::playerTurn() {
 	if (player % 2 == 0) {
-		std::cout << "Player 1's turn\n";
+		std::cout << "Player 1's (X) turn\n";
 	}
 	else {
-		std::cout << "Player 2's turn\n";
+		std::cout << "Player 2's (O) turn\n";
 	}
 
 	getRowAndCol();
