@@ -2,6 +2,10 @@
 """
 Created on Wed Nov 16 18:27:39 2022
 
+Illustrates how sampling at the Nyqusit rate can fail to 
+adequately capture a signal.  A better choice for minimum
+sampling frequency is 5X the signal's highest frequency component. 
+
 @author: mxz50
 """
 
