@@ -4,16 +4,13 @@
 void printPrimes(int n) {
 
 	int nfactors{};
-	static int n_computations{};
 
 	std::cout << "\nPrime numbers from 1 to " << n << ": " << std::endl;
 
 	for (size_t i{ 2 }; i <= n; ++i) {
 		for (size_t j{ 2 }; j <= i/2; ++j) {
-			if (i % j == 0) {
+			if (i % j == 0)
 				nfactors++;
-				n_computations++;
-			}
 		}
 
 		if (nfactors == 0)
