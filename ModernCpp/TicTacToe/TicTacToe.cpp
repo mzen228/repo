@@ -136,7 +136,8 @@ bool TicTacToe::endGame() {
 		return true;
 	}
 
-	return checkDraw();
+	// make sure to check for draws only after checking for winners 
+	return checkDraw(); 
 }
 
 bool TicTacToe::checkDraw() {
@@ -144,7 +145,7 @@ bool TicTacToe::checkDraw() {
 	for (size_t i{}; i < playingBoard.size(); ++i)
 		for (size_t j{}; j < playingBoard.size(); ++j)
 			if (playingBoard.at(i).at(j) == '*')
-				return 0;
+				return false;
 	std::cout << "\nDraw!\n";
 	return true;
 }
