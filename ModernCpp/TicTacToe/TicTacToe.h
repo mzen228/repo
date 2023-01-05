@@ -25,5 +25,6 @@ public:
 	bool checkDraw();
 	void updateBoard();
 	void uniqueMove();
+	void whosTurn();
 };
 

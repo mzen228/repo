@@ -4,14 +4,7 @@
 
 void TicTacToe::playerTurn() {
 	displayBoard();
-
-	if (player % 2 == 0) {
-		std::cout << "Player 1's (X) turn\n";
-	}
-	else {
-		std::cout << "Player 2's (O) turn\n";
-	}
-
+	whosTurn();
 	getRowAndCol();
 	uniqueMove();
 	updateBoard();
@@ -27,6 +20,17 @@ void TicTacToe::displayBoard() {
 		}
 		std::cout << "\n\n";
 	}
+}
+
+void TicTacToe::whosTurn() {
+
+	if (player % 2 == 0) {
+		std::cout << "Player 1's (X) turn\n";
+	}
+	else {
+		std::cout << "Player 2's (O) turn\n";
+	}
+
 }
 
 void TicTacToe::getRowAndCol() {
