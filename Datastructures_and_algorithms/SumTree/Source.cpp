@@ -3,16 +3,16 @@ all elements present in its left and right subtree*/
 
 #include <iostream>
 
-int preorderSum(Node* root);
-void sumTree(Node* root);
-void preorderTraversal(Node* root);
-
 struct Node {
 	int data;
 	Node* rchild;
-	Node* lchild; 
+	Node* lchild;
 	Node(int data_) :data{ data_ }, rchild{ nullptr }, lchild{ nullptr } {}
 };
+
+int preorderSum(Node* root);
+void sumTree(Node* root);
+void preorderTraversal(Node* root);
 
 void preorderTraversal(Node* root) {
 
@@ -31,7 +31,6 @@ void sumTree(Node* root) {
 		return;
 
 	root->data = preorderSum(root) - root->data; 
-	std::cout << root->data << ", ";
 
 	sumTree(root->lchild);
 	sumTree(root->rchild);
@@ -61,6 +60,7 @@ int main() {
 
 	std::cout << "Preorder traversal of sum tree: ";
 	sumTree(root);
+	preorderTraversal(root);
 	std::cout << std::endl;
 
 	return 0;
