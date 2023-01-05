@@ -11,8 +11,8 @@ int main() {
 
 	TicTacToe game;
 
-	while(!game.endGame()){
-		game.displayBoard();
+	while(!game.endGame())
 		game.playerTurn();
-	}
+
+	return 0;
 }

@@ -2,6 +2,22 @@
 #include <iostream>
 #include <iomanip>
 
+void TicTacToe::playerTurn() {
+	displayBoard();
+
+	if (player % 2 == 0) {
+		std::cout << "Player 1's (X) turn\n";
+	}
+	else {
+		std::cout << "Player 2's (O) turn\n";
+	}
+
+	getRowAndCol();
+	uniqueMove();
+	updateBoard();
+	player++;
+}
+
 void TicTacToe::displayBoard() {
 	std::cout << "\n";
 	for (auto row : playingBoard) {
@@ -11,7 +27,43 @@ void TicTacToe::displayBoard() {
 		}
 		std::cout << "\n\n";
 	}
+}
 
+void TicTacToe::getRowAndCol() {
+	do {
+		std::cout << "Enter the row and col separated by spaces: ";
+		std::cin >> row >> col;
+
+		validCol = true;
+		validRow = true;
+
+		if (row > 2 || row < 0) {
+			std::cout << "Invalid row entry.\n";
+			validRow = false;
+		}
+
+		if (col > 2 || col < 0) {
+			std::cout << "Invalid col entry.\n";
+			validCol = false;
+		}
+
+	} while (!validRow || !validCol);
+}
+
+void TicTacToe::uniqueMove() {
+	while (playingBoard.at(row).at(col) != '*') {
+		std::cout << "Invalid move.\n";
+		getRowAndCol();
+	}
+}
+
+void TicTacToe::updateBoard() {
+	if (player % 2 == 0) {
+		playingBoard.at(row).at(col) = 'X';
+	}
+	else {
+		playingBoard.at(row).at(col) = '0';
+	}
 }
 
 void TicTacToe::getWinner() {
@@ -21,16 +73,6 @@ void TicTacToe::getWinner() {
 		std::cout << "\nPlayer 1 is the winner!\n";
 	else
 		std::cout << "\nPlayer 2 is the winner!\n";
-}
-
-bool TicTacToe::checkDraw() {
-
-	for (size_t i{}; i < playingBoard.size(); ++i)
-		for (size_t j{}; j < playingBoard.size(); ++j)
-			if (playingBoard.at(i).at(j) == '*')
-				return 0;
-	std::cout << "\nDraw!\n";
-	return true; 
 }
 
 bool TicTacToe::endGame() {
@@ -97,53 +139,12 @@ bool TicTacToe::endGame() {
 	return checkDraw();
 }
 
-void TicTacToe::getRowAndCol() {
-	do {
-		std::cout << "Enter the row and col separated by spaces: ";
-		std::cin >> row >> col;
+bool TicTacToe::checkDraw() {
 
-		validCol = true;
-		validRow = true;
-
-		if (row > 2 || row < 0) {
-			std::cout << "Invalid row entry.\n";
-			validRow = false;
-		}
-
-		if (col > 2 || col < 0) {
-			std::cout << "Invalid col entry.\n";
-			validCol = false;
-		}
-
-	} while (!validRow || !validCol);
-}
-
-void TicTacToe::uniqueMove() {
-	while (playingBoard.at(row).at(col) != '*') {
-		std::cout << "Invalid move.\n";
-		getRowAndCol();
-	}
-}
-
-void TicTacToe::playerTurn() {
-	if (player % 2 == 0) {
-		std::cout << "Player 1's (X) turn\n";
-	}
-	else {
-		std::cout << "Player 2's (O) turn\n";
-	}
-
-	getRowAndCol();
-	uniqueMove();
-	updateBoard();
-	player++;
-}
-
-void TicTacToe::updateBoard() {
-	if (player % 2 == 0) {
-		playingBoard.at(row).at(col) = 'X';
-	}
-	else {
-		playingBoard.at(row).at(col) = '0';
-	}
+	for (size_t i{}; i < playingBoard.size(); ++i)
+		for (size_t j{}; j < playingBoard.size(); ++j)
+			if (playingBoard.at(i).at(j) == '*')
+				return 0;
+	std::cout << "\nDraw!\n";
+	return true;
 }
