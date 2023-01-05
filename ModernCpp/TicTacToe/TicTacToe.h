@@ -21,7 +21,7 @@ public:
 	void playerTurn();
 	void getRowAndCol();
 	bool endGame();
-	int getWinner();
+	void getWinner();
 	void draw();
 	void checkDraw();
 	void updateBoard();

@@ -14,11 +14,12 @@ void TicTacToe::displayBoard() {
 
 }
 
-int TicTacToe::getWinner() {
+void TicTacToe::getWinner() {
 	displayBoard();
-	winner = player % 2 + 1; // player 1 or 2
-	std::cout << "\nPlayer " << winner << " is the winner!\n";
-	return winner;
+	if (player % 2 == 1)
+		std::cout << "\nPlayer 1 is the winner!\n";
+	else
+		std::cout << "\nPlayer 2 is the winner!\n";
 }
 
 void TicTacToe::checkDraw() {
@@ -98,7 +99,6 @@ bool TicTacToe::endGame() {
 		return true;
 	}
 
-	player++;
 	return 0;
 }
 
@@ -138,6 +138,7 @@ void TicTacToe::playerTurn() {
 		std::cout << "Player 2's (O) turn\n";
 	}
 
+	player++;
 	getRowAndCol();
 	uniqueMove();
 	updateBoard();
@@ -145,9 +146,9 @@ void TicTacToe::playerTurn() {
 
 void TicTacToe::updateBoard() {
 	if (player % 2 == 0) {
-		playingBoard.at(row).at(col) = 'X';
+		playingBoard.at(row).at(col) = 'O';
 	}
 	else {
-		playingBoard.at(row).at(col) = 'O';
+		playingBoard.at(row).at(col) = 'X';
 	}
 }
