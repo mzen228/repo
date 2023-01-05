@@ -12,10 +12,9 @@ class TicTacToe
 	int winner;
 	bool validRow;
 	bool validCol;
-	bool isDraw;
 	
 public:
-	TicTacToe() :isDraw{ false },validRow { true }, validCol{ true }, winner{}, player{ 0 }, gameEnd{ false }, row{ 0 }, col{ 0 }, playingBoard(3, std::vector<char>(3, '*')) {}
+	TicTacToe() :validRow { true }, validCol{ true }, winner{}, player{ 0 }, gameEnd{ false }, row{ 0 }, col{ 0 }, playingBoard(3, std::vector<char>(3, '*')) {}
 	~TicTacToe() {}
 	void displayBoard();
 	void playerTurn();
@@ -23,7 +22,7 @@ public:
 	bool endGame();
 	void getWinner();
 	void draw();
-	void checkDraw();
+	bool checkDraw();
 	void updateBoard();
 	void uniqueMove();
 };

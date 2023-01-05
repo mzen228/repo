@@ -16,19 +16,21 @@ void TicTacToe::displayBoard() {
 
 void TicTacToe::getWinner() {
 	displayBoard();
+
 	if (player % 2 == 1)
 		std::cout << "\nPlayer 1 is the winner!\n";
 	else
 		std::cout << "\nPlayer 2 is the winner!\n";
 }
 
-void TicTacToe::checkDraw() {
+bool TicTacToe::checkDraw() {
 
 	for (size_t i{}; i < playingBoard.size(); ++i)
 		for (size_t j{}; j < playingBoard.size(); ++j)
 			if (playingBoard.at(i).at(j) == '*')
-				return;
-	isDraw = true;
+				return 0;
+	std::cout << "\nDraw!\n";
+	return true; 
 }
 
 bool TicTacToe::endGame() {
@@ -92,14 +94,7 @@ bool TicTacToe::endGame() {
 		return true;
 	}
 
-	checkDraw();
-
-	if (isDraw) {
-		std::cout << "\nDraw!\n";
-		return true;
-	}
-
-	return 0;
+	return checkDraw();
 }
 
 void TicTacToe::getRowAndCol() {
@@ -138,17 +133,17 @@ void TicTacToe::playerTurn() {
 		std::cout << "Player 2's (O) turn\n";
 	}
 
-	player++;
 	getRowAndCol();
 	uniqueMove();
 	updateBoard();
+	player++;
 }
 
 void TicTacToe::updateBoard() {
 	if (player % 2 == 0) {
-		playingBoard.at(row).at(col) = 'O';
+		playingBoard.at(row).at(col) = 'X';
 	}
 	else {
-		playingBoard.at(row).at(col) = 'X';
+		playingBoard.at(row).at(col) = '0';
 	}
 }
