@@ -5,16 +5,16 @@ all elements present in its left and right subtree*/
 
 struct Node {
 	int data;
-	Node* rchild;
-	Node* lchild;
+	std::shared_ptr<Node> rchild;
+	std::shared_ptr<Node> lchild;
 	Node(int data_) :data{ data_ }, rchild{ nullptr }, lchild{ nullptr } {}
 };
 
-int preorderSum(Node* root);
-void sumTree(Node* root);
-void preorderTraversal(Node* root);
+int preorderSum(std::shared_ptr<Node> root);
+void sumTree(std::shared_ptr<Node> root);
+void preorderTraversal(std::shared_ptr<Node> root);
 
-void preorderTraversal(Node* root) {
+void preorderTraversal(std::shared_ptr<Node> root) {
 
 	if (!root)
 		return;
@@ -25,7 +25,7 @@ void preorderTraversal(Node* root) {
 	preorderTraversal(root->rchild);
 }
 
-void sumTree(Node* root) {
+void sumTree(std::shared_ptr<Node> root) {
 	
 	if (!root)
 		return;
@@ -36,7 +36,7 @@ void sumTree(Node* root) {
 	sumTree(root->rchild);
 }
 
-int preorderSum(Node* root) {
+int preorderSum(std::shared_ptr<Node> root) {
 	
 	if (!root)
 		return 0;
@@ -45,14 +45,14 @@ int preorderSum(Node* root) {
 }
 
 int main() {
-	Node* root = new Node(1);
-	root->lchild = new Node(2);
-	root->rchild = new Node(3);
-	root->lchild->rchild = new Node(4);
-	root->rchild->lchild = new Node(5);
-	root->rchild->rchild = new Node(6);
-	root->rchild->lchild->lchild = new Node(7);
-	root->rchild->lchild->rchild = new Node(8);
+	auto root = std::make_shared<Node>(1);
+	root->lchild = std::make_shared<Node>(2);
+	root->rchild = std::make_shared<Node>(3);
+	root->lchild->rchild = std::make_shared<Node>(4);
+	root->rchild->lchild = std::make_shared<Node>(5);
+	root->rchild->rchild = std::make_shared<Node>(6);
+	root->rchild->lchild->lchild = std::make_shared<Node>(7);
+	root->rchild->lchild->rchild = std::make_shared<Node>(8);
 
 	std::cout << "Preorder traversal of original tree: ";
 	preorderTraversal(root);
