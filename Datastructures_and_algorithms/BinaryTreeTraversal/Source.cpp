@@ -2,12 +2,12 @@
 
 struct Node {
 	int data;
-	Node* rchild;
-	Node* lchild;
+	std::shared_ptr<Node> rchild;
+	std::shared_ptr<Node> lchild;
 	Node(int d) :data{ d }, rchild{ nullptr }, lchild{ nullptr } {}
 };
 
-void preorder(Node* root) {
+void preorder(std::shared_ptr<Node> root) {
 
 	if (!root)
 		return;
@@ -19,7 +19,7 @@ void preorder(Node* root) {
 	preorder(root->rchild); 
 }
 
-void inorder(Node* root) {
+void inorder(std::shared_ptr<Node> root) {
 
 	if (!root)
 		return;
@@ -31,7 +31,7 @@ void inorder(Node* root) {
 	inorder(root->rchild);
 }
 
-void postorder(Node* root) {
+void postorder(std::shared_ptr<Node> root) {
 
 	if (!root)
 		return;
@@ -43,7 +43,7 @@ void postorder(Node* root) {
 	std::cout << root->data << ", ";
 }
 
-void btTraversals(Node* root) {
+void btTraversals(std::shared_ptr<Node> root) {
 	std::cout << "Preorder traversal: ";
 	preorder(root);
 	std::cout << std::endl;
@@ -58,13 +58,13 @@ void btTraversals(Node* root) {
 }
 
 int main() {
-	Node* root = new Node(1);
-	root->lchild = new Node(2);
-	root->rchild = new Node(3); 
-	root->lchild->lchild = new Node(4);
-	root->lchild->rchild = new Node(5);
-	root->rchild->lchild = new Node(6);
-	root->rchild->rchild = new Node(7);
+	std::shared_ptr<Node> root = std::make_shared<Node>(1);
+	root->lchild = std::make_shared<Node>(2);
+	root->rchild = std::make_shared<Node>(3); 
+	root->lchild->lchild = std::make_shared<Node>(4);
+	root->lchild->rchild = std::make_shared<Node>(5);
+	root->rchild->lchild = std::make_shared<Node>(6);
+	root->rchild->rchild = std::make_shared<Node>(7);
 
 	btTraversals(root);
 

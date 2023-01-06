@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b7e8dba5-6ee1-4eec-bf62-533d903751bb}</ProjectGuid>
+    <ProjectGuid>{DF8D7F53-402F-4396-8441-85122C87AC55}</ProjectGuid>
     <RootNamespace>PreorderTraversal</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
