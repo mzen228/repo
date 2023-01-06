@@ -3,8 +3,8 @@
 
 struct Node {
 	int data;
-	Node* lchild;
-	Node* rchild;
+	std::shared_ptr<Node> lchild;
+	std::shared_ptr<Node> rchild;
 	Node() {}
 	Node(int data_) :data{ data_ } {
 		lchild = nullptr;
@@ -12,7 +12,7 @@ struct Node {
 	}
 };
 
-void preorderTraversal(Node* root) {
+void preorderTraversal(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
@@ -21,7 +21,7 @@ void preorderTraversal(Node* root) {
 	preorderTraversal(root->rchild);
 }
 
-void reversePreorderTraversal(Node* root) {
+void reversePreorderTraversal(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
@@ -30,7 +30,7 @@ void reversePreorderTraversal(Node* root) {
 	reversePreorderTraversal(root->lchild);
 }
 
-void postorderTraversal(Node* root) {
+void postorderTraversal(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
@@ -39,7 +39,7 @@ void postorderTraversal(Node* root) {
 	std::cout << root->data << ", ";
 }
 
-void reversePostorderTraversal(Node* root) {
+void reversePostorderTraversal(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
@@ -48,7 +48,7 @@ void reversePostorderTraversal(Node* root) {
 	std::cout << root->data << ", ";
 }
 
-void inorderTraversal(Node* root) {
+void inorderTraversal(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
@@ -57,7 +57,7 @@ void inorderTraversal(Node* root) {
 	inorderTraversal(root->rchild);
 }
 
-void reverseInorderTraversal(Node* root) {
+void reverseInorderTraversal(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
@@ -66,7 +66,7 @@ void reverseInorderTraversal(Node* root) {
 	reverseInorderTraversal(root->lchild);
 }
 
-void traversals(Node* root) {
+void traversals(std::shared_ptr<Node> root) {
 	if (!root)
 		return;
 
