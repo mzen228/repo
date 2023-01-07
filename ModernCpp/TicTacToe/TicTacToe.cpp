@@ -23,14 +23,10 @@ void TicTacToe::displayBoard() {
 }
 
 void TicTacToe::whosTurn() {
-
-	if (player % 2 == 0) {
+	if (player % 2 == 0)
 		std::cout << "Player 1's (X) turn\n";
-	}
-	else {
+	else
 		std::cout << "Player 2's (O) turn\n";
-	}
-
 }
 
 void TicTacToe::getRowAndCol() {
@@ -119,6 +115,7 @@ bool TicTacToe::endGame() {
 	if (playingBoard.at(0).at(0) == playingBoard.at(0).at(1) && 
 		playingBoard.at(0).at(0) == playingBoard.at(0).at(2) && 
 		playingBoard.at(0).at(0) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -129,6 +126,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(1).at(0) == playingBoard.at(1).at(1) && 
 		playingBoard.at(1).at(0) == playingBoard.at(1).at(2) && 
 		playingBoard.at(1).at(0) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -139,6 +137,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(2).at(0) == playingBoard.at(2).at(1) && 
 		playingBoard.at(2).at(0) == playingBoard.at(2).at(2) && 
 		playingBoard.at(2).at(0) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -149,6 +148,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(0).at(0) == playingBoard.at(1).at(0) && 
 		playingBoard.at(0).at(0) == playingBoard.at(2).at(0) && 
 		playingBoard.at(0).at(0) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -159,6 +159,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(0).at(1) == playingBoard.at(1).at(1) && 
 		playingBoard.at(0).at(1) == playingBoard.at(2).at(1) && 
 		playingBoard.at(0).at(1) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -169,6 +170,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(0).at(2) == playingBoard.at(1).at(2) && 
 		playingBoard.at(0).at(2) == playingBoard.at(2).at(2) && 
 		playingBoard.at(0).at(2) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -179,6 +181,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(0).at(0) == playingBoard.at(1).at(1) &&
 		playingBoard.at(0).at(0) == playingBoard.at(2).at(2) &&
 		playingBoard.at(0).at(0) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -189,6 +192,7 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(2).at(0) == playingBoard.at(1).at(1) &&
 		playingBoard.at(2).at(0) == playingBoard.at(0).at(2) &&
 		playingBoard.at(2).at(0) != '*') {
+
 		getWinner();
 		displayStats();
 		if (playAgain())
