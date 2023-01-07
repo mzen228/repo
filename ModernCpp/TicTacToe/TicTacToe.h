@@ -2,6 +2,7 @@
 #include <vector>
 #include "TicTacToe.h"
 
+// new change
 class TicTacToe
 {
 	std::vector<std::vector<char>> playingBoard;
@@ -12,9 +13,13 @@ class TicTacToe
 	int winner;
 	bool validRow;
 	bool validCol;
+	int nGames;
+	int nDraws; 
+	int firstPlayerWins;
+	int secondPlayerWins;
 	
 public:
-	TicTacToe() :validRow { true }, validCol{ true }, winner{}, player{ 0 }, gameEnd{ false }, row{ 0 }, col{ 0 }, playingBoard(3, std::vector<char>(3, '*')) {}
+	TicTacToe() : firstPlayerWins{}, secondPlayerWins{}, nDraws {}, nGames{}, validRow{ true }, validCol{ true }, winner{}, player{ 0 }, gameEnd{ false }, row{ 0 }, col{ 0 }, playingBoard(3, std::vector<char>(3, '*')) {}
 	~TicTacToe() {}
 	void displayBoard();
 	void playerTurn();
@@ -26,5 +31,8 @@ public:
 	void updateBoard();
 	void uniqueMove();
 	void whosTurn();
+	bool playAgain();
+	void resetBoard(); 
+	void displayStats();
 };
 

@@ -73,10 +73,42 @@ void TicTacToe::updateBoard() {
 void TicTacToe::getWinner() {
 	displayBoard();
 
-	if (player % 2 == 1)
+	if (player % 2 == 1) {
+		firstPlayerWins++;
 		std::cout << "\nPlayer 1 is the winner!\n";
-	else
+	}
+	else {
+		secondPlayerWins++;
 		std::cout << "\nPlayer 2 is the winner!\n";
+	}
+}
+
+void TicTacToe::resetBoard() {
+	for (size_t i{}; i < playingBoard.size(); ++i)
+		for (size_t j{}; j < playingBoard.size(); ++j)
+			playingBoard.at(i).at(j) = '*'; 
+}
+
+void TicTacToe::displayStats() {
+	nGames++;
+	std::cout << "\nTotal number of games played : " << nGames << std::endl;
+	std::cout << "Player 1 wins: " << firstPlayerWins << std::endl;
+	std::cout << "Player 2 wins: " << secondPlayerWins << std::endl;
+	std::cout << "Number of draws: " << nDraws << std::endl << std::endl; 
+}
+
+bool TicTacToe::playAgain() {
+	char choice{};
+	std::cout << "\nPlay again?  Enter 'y' or 'n': ";
+	std::cin >> choice;
+
+	if (choice == 'Y' || choice == 'y') {
+		resetBoard();
+		player = 0; // reset player 
+		return true; 
+	}
+	else 
+		return false; 
 }
 
 bool TicTacToe::endGame() {
@@ -88,6 +120,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(0) == playingBoard.at(0).at(2) && 
 		playingBoard.at(0).at(0) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// middle row
@@ -95,6 +130,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(1).at(0) == playingBoard.at(1).at(2) && 
 		playingBoard.at(1).at(0) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// bottom row
@@ -102,6 +140,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(2).at(0) == playingBoard.at(2).at(2) && 
 		playingBoard.at(2).at(0) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// left column
@@ -109,6 +150,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(0) == playingBoard.at(2).at(0) && 
 		playingBoard.at(0).at(0) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// middle column
@@ -116,6 +160,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(1) == playingBoard.at(2).at(1) && 
 		playingBoard.at(0).at(1) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// right column
@@ -123,6 +170,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(2) == playingBoard.at(2).at(2) && 
 		playingBoard.at(0).at(2) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// diagonal
@@ -130,6 +180,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(0) == playingBoard.at(2).at(2) &&
 		playingBoard.at(0).at(0) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 	// diagonal
@@ -137,6 +190,9 @@ bool TicTacToe::endGame() {
 		playingBoard.at(2).at(0) == playingBoard.at(0).at(2) &&
 		playingBoard.at(2).at(0) != '*') {
 		getWinner();
+		displayStats();
+		if (playAgain())
+			return false;
 		return true;
 	}
 
@@ -150,6 +206,10 @@ bool TicTacToe::checkDraw() {
 		for (size_t j{}; j < playingBoard.size(); ++j)
 			if (playingBoard.at(i).at(j) == '*')
 				return false;
+	nDraws++;
 	std::cout << "\nDraw!\n";
+	displayStats();
+	if (playAgain())
+		return false;
 	return true;
 }
