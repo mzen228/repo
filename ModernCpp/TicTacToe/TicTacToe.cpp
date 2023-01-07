@@ -86,7 +86,6 @@ void TicTacToe::resetBoard() {
 }
 
 void TicTacToe::displayStats() {
-	nGames++;
 	std::cout << "\nTotal number of games played : " << nGames << std::endl;
 	std::cout << "Player 1 wins: " << firstPlayerWins << std::endl;
 	std::cout << "Player 2 wins: " << secondPlayerWins << std::endl;
@@ -116,6 +115,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(0) == playingBoard.at(0).at(2) && 
 		playingBoard.at(0).at(0) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -127,6 +127,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(1).at(0) == playingBoard.at(1).at(2) && 
 		playingBoard.at(1).at(0) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -138,6 +139,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(2).at(0) == playingBoard.at(2).at(2) && 
 		playingBoard.at(2).at(0) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -149,6 +151,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(0) == playingBoard.at(2).at(0) && 
 		playingBoard.at(0).at(0) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -160,6 +163,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(1) == playingBoard.at(2).at(1) && 
 		playingBoard.at(0).at(1) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -170,7 +174,8 @@ bool TicTacToe::endGame() {
 	else if (playingBoard.at(0).at(2) == playingBoard.at(1).at(2) && 
 		playingBoard.at(0).at(2) == playingBoard.at(2).at(2) && 
 		playingBoard.at(0).at(2) != '*') {
-
+		
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -182,6 +187,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(0).at(0) == playingBoard.at(2).at(2) &&
 		playingBoard.at(0).at(0) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -193,6 +199,7 @@ bool TicTacToe::endGame() {
 		playingBoard.at(2).at(0) == playingBoard.at(0).at(2) &&
 		playingBoard.at(2).at(0) != '*') {
 
+		nGames++;
 		getWinner();
 		displayStats();
 		if (playAgain())
@@ -210,6 +217,7 @@ bool TicTacToe::checkDraw() {
 		for (size_t j{}; j < playingBoard.size(); ++j)
 			if (playingBoard.at(i).at(j) == '*')
 				return false;
+	nGames++;
 	nDraws++;
 	std::cout << "\nDraw!\n";
 	displayStats();
