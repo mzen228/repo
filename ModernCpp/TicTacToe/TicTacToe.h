@@ -2,7 +2,6 @@
 #include <vector>
 #include "TicTacToe.h"
 
-// new change
 class TicTacToe
 {
 	std::vector<std::vector<char>> playingBoard;
