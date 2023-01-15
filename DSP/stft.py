@@ -1,6 +1,6 @@
 """
 Display a linear chirp in the time-domain, frequency-domain, and
-the time-frequency domain
+the time-frequency domain using a short-time Fourier transform
 """
 from scipy.fftpack import fft
 from matplotlib import pyplot as plt
@@ -8,12 +8,11 @@ import numpy as np
 
 def computeSTFT(signal,win_length,step_size):
     N = len(signal)
-    window = np.zeros(N)
     stft = np.zeros(N)
 
     for win_start in range(0, N, step_size):
         window = np.zeros(N)
-        window[win_start:win_start + win_length] = 1
+        window[win_start:win_start + win_length] = 1 # rectangular window 
         x_window = signal * window
         x_window_fft = (2 / N) * abs(fft(x_window))
         stft = np.column_stack((stft, x_window_fft))
