@@ -27,7 +27,7 @@ int main() {
     withdraw(accounts,2000);*/
     
     // Savings 
-
+    /*
     vector<Savings_Account> sav_accounts;
     sav_accounts.push_back(Savings_Account {} );
     sav_accounts.push_back(Savings_Account {"Superman"} );
@@ -36,10 +36,10 @@ int main() {
 
     display(sav_accounts);
     deposit(sav_accounts, 1000);
-    withdraw(sav_accounts,2000);
+    withdraw(sav_accounts,2000);*/
    
    // Checking
-   
+   /*
     vector<Checking_Account> check_accounts;
     check_accounts.push_back(Checking_Account {} );
     check_accounts.push_back(Checking_Account {"Kirk"} );
@@ -48,10 +48,10 @@ int main() {
 
     display(check_accounts);
     deposit(check_accounts, 1000);
-    withdraw(check_accounts, 2000);
+    withdraw(check_accounts, 2000);*/
     
     // Trust
-  
+    
     vector<Trust_Account> trust_accounts;
     trust_accounts.push_back(Trust_Account {} );
     trust_accounts.push_back(Trust_Account {"Athos", 10000, 5.0} );
@@ -64,8 +64,8 @@ int main() {
     
     // Withdraw 5 times from each trust account
     // All withdrawals should fail if there are too many withdrawals or if the withdrawl is > 20% of the balance
-    for (int i=1; i<=5; i++)
-        withdraw(trust_accounts, 1000);
+    //for (int i=1; i<=5; i++)
+        //withdraw(trust_accounts, 1000);
     
     
     
