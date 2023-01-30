@@ -14,6 +14,7 @@ int main() {
     cout.precision(2);
     cout << fixed;
    
+    /*
     // Accounts
     vector<Account> accounts;
     accounts.push_back(Account {});
@@ -23,7 +24,7 @@ int main() {
     
     display(accounts);
     deposit(accounts, 1000);
-    withdraw(accounts,2000);
+    withdraw(accounts,2000);*/
     
     // Savings 
 
@@ -48,7 +49,7 @@ int main() {
     display(check_accounts);
     deposit(check_accounts, 1000);
     withdraw(check_accounts, 2000);
-
+    
     // Trust
   
     vector<Trust_Account> trust_accounts;
@@ -66,7 +67,7 @@ int main() {
     for (int i=1; i<=5; i++)
         withdraw(trust_accounts, 1000);
     
-
+    
     
     return 0;
 }

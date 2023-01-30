@@ -1,4 +1,5 @@
 #include "Checking_Account.h"
+#include "Savings_Account.h"
 
 Checking_Account::Checking_Account(std::string name, double balance)
     : Account {name, balance} {
@@ -6,7 +7,13 @@ Checking_Account::Checking_Account(std::string name, double balance)
 
 bool Checking_Account::withdraw(double amount) {
     amount += per_check_fee;
-    return Account::withdraw(amount);
+    if (balance - amount >= 0) {
+        balance -= amount;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 std::ostream &operator<<(std::ostream &os, const Checking_Account &account) {
@@ -14,3 +21,11 @@ std::ostream &operator<<(std::ostream &os, const Checking_Account &account) {
     return os;
 }
 
+bool Checking_Account::deposit(double amount) {
+    if (amount < 0)
+        return false;
+    else {
+        balance += amount;
+        return true;
+    }
+}
