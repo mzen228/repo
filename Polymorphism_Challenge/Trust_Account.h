@@ -19,12 +19,13 @@ public:
     Trust_Account(std::string name = def_name,  double balance = def_balance, double int_rate = def_int_rate);
     
     // Deposits of $5000.00 or more will receive $50 bonus
-    bool deposit(double amount);
+    virtual bool deposit(double amount) override; 
     
     // Only allowed maximum of 3 withdrawals, each can be up to a maximum of 20% of the account's value
-    bool withdraw(double amount);
+    virtual bool withdraw(double amount) override;
 
     virtual void print(std::ostream& os)const override;
+    virtual ~Trust_Account() {}
 };
 
 #endif // _TRUST_ACCOUNT_H_
