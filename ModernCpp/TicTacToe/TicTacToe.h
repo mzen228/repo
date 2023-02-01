@@ -18,7 +18,7 @@ class TicTacToe
 	int secondPlayerWins;
 	
 public:
-	TicTacToe() : firstPlayerWins{}, secondPlayerWins{}, nDraws {}, nGames{}, validRow{ true }, validCol{ true }, winner{}, player{ 0 }, gameEnd{ false }, row{ 0 }, col{ 0 }, playingBoard(3, std::vector<char>(3, '*')) {}
+	TicTacToe();
 	~TicTacToe() {}
 	void displayBoard();
 	void playerTurn();

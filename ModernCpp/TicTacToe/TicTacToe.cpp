@@ -2,6 +2,22 @@
 #include <iostream>
 #include <iomanip>
 
+TicTacToe::TicTacToe():
+	firstPlayerWins{}, 
+	secondPlayerWins{}, 
+	nDraws{}, 
+	nGames{}, 
+	validRow{ true }, 
+	validCol{ true }, 
+	winner{}, 
+	player{ 0 }, 
+	gameEnd{ false }, 
+	row{ 0 }, 
+	col{ 0 }, 
+	playingBoard(3, std::vector<char>(3, '*')) 
+{}
+
+
 void TicTacToe::playerTurn() {
 	displayBoard();
 	whosTurn();
