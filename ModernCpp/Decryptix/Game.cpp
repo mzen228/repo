@@ -2,36 +2,43 @@
 #include <iostream>
 
 Game::Game():
-	howManyPositions{ 0 },
-	howManyLetters{ 0 },
-	duplicatesAllowed{ false },
-	round{ 1 } 
+	how_many_positions{ 0 },
+	how_many_letters{ 0 },
+	duplicates_allowed{ false },
+	round{ 1 },
+	alphabet{ "abcdefghijklmnopqrstuvwxyz" },
+	solution{ "" },
+	guess{},
+	guesses{ "" },
+	n_correct{},
+	n_guesses{},
+	display_word{ "" }
 {
 
-	const int minLetters = 2;
-	const int maxLetters = 10;
-	const int minPositions = 3;
-	const int maxPositions = 10;
+	const int min_letters = 2;
+	const int max_letters = 10;
+	const int min_positions = 3;
+	const int max_positions = 10;
 
-	Game::instructions();
+	//Game::instructions();
 
 	while (true) {
 
 		while (true) {
 			std::cout << "How many letters? (";
-			std::cout << minLetters << "-" << maxLetters << "): ";
-			std::cin >> howManyLetters;
+			std::cout << min_letters << "-" << max_letters << "): ";
+			std::cin >> how_many_letters;
 
-			if (howManyLetters >= minLetters && howManyLetters <= maxLetters)
+			if (how_many_letters >= min_letters && how_many_letters <= max_letters)
 				break;
 		}
 
 		while (true) {
 			std::cout << "How many positions? (";
-			std::cout << minPositions << "-" << maxPositions << "): ";
-			std::cin >> howManyPositions;
+			std::cout << min_positions << "-" << max_positions << "): ";
+			std::cin >> how_many_positions;
 
-			if (howManyPositions >= minPositions && howManyPositions <= maxPositions)
+			if (how_many_positions >= min_positions && how_many_positions <= max_positions)
 				break;
 		}
 
@@ -41,14 +48,37 @@ Game::Game():
 			std::cin >> choice;
 		}
 
-		duplicatesAllowed = (choice == 'y') ? true : false;
+		duplicates_allowed = (choice == 'y') ? true : false;
 
-		if (!duplicatesAllowed && howManyPositions > howManyLetters) {
-			std::cout << "I can't put " << howManyLetters << " letters in " << howManyPositions
+		if (!duplicates_allowed && how_many_positions > how_many_letters) {
+			std::cout << "I can't put " << how_many_letters << " letters in " << how_many_positions
 				<< " positions without duplicates!  Please try again.\n";
 		}
 		else {
+			display_word.insert(0, how_many_positions, '_');
 			break;
+		}
+	}
+
+	generateSolution(); 
+
+}
+
+void Game::generateSolution() {
+	srand((unsigned)time(NULL)); 
+
+	for (size_t i{}; i < how_many_positions; ++i) {
+
+		int idx = rand() % how_many_letters; 
+
+		if (duplicates_allowed) {
+			solution += alphabet[idx]; 
+		}
+		else {
+			while(solution.find(alphabet[idx])!=std::string::npos){
+				idx = rand() % how_many_letters;
+			}
+			solution += alphabet[idx];
 		}
 	}
 }
@@ -79,3 +109,50 @@ void Game::instructions() {
 	std::cout << "and score each of my answers.\n\n" << std::endl;
 }
 
+void Game::score() {
+
+	for (size_t i{}; i < solution.size(); ++i) {
+		if (guess == solution[i]) {
+			display_word[i] = guess; 
+			n_correct++; 
+		}
+	}
+
+}
+
+void Game::play() {
+
+	while (true) {
+
+		while (true) {
+			std::cout << "Enter a char: ";
+			std::cin >> guess;
+
+			if (guesses.find(guess) == std::string::npos) {
+				guesses += guess;
+				break;
+			}
+		}
+
+		n_guesses++; 
+		score();
+		display(); 
+
+		if (n_correct == solution.size()) {
+			std::cout << "You win!  And it only took " << n_guesses << " guesses.\n";
+			break; 
+		}
+	}
+
+}
+
+Game::~Game() {
+	std::cout << "Game dtor\n";
+}
+
+void Game::display() const {
+	
+	for (auto c : display_word)
+		std::cout << c << ' ';
+	std::cout << std::endl;
+}
