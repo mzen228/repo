@@ -5,8 +5,6 @@ class Game
 {
 	int how_many_letters;
 	int how_many_positions;
-	int minPositions;
-	int maxPositions; 
 	bool duplicates_allowed;
 	int round;
 	std::string solution; 
