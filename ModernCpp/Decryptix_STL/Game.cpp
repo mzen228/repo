@@ -4,7 +4,7 @@
 Game::Game():
 	m_how_many_positions{  },
 	m_how_many_letters{  },
-	m_duplicates_allowed{ false },
+	m_duplicates_allowed{ },
 	m_round{ 1 },
 	m_alphabet{ "abcdefghijklmnopqrstuvwxyz" },
 	m_solution{ },
@@ -168,14 +168,16 @@ void Game::play() {
 	while (true) {
 
 		while (true) {
-			std::cout << "Round " << m_round++ << ". Enter -? or "
+			std::cout << "Round " << m_round << ". Enter -? or "
 				<< m_how_many_positions << " letters between " <<
 				m_alphabet[0] << " and " << m_alphabet[m_how_many_letters - 1] << ": ";
 
 			std::cin >> new_guess;
 
-			if (new_guess[0] == '-')
+			if (new_guess[0] == '-') {
 				handleFlag(new_guess[1]);
+				continue;
+			}
 			
 			break; 
 
@@ -194,9 +196,10 @@ void Game::play() {
 			if (m_round <= 6)
 				std::cout << "only ";
 
-			std::cout << " took you " << m_round << " guesses.\n";
+			std::cout << "took you " << m_round << " guesses.\n";
 			break; 
 		}
+		m_round++;
 	}
 
 }

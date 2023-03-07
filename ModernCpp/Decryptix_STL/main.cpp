@@ -10,10 +10,8 @@ int main() {
 	
 	while (true) {
 		Game game;
-		//game.getHint();
 		game.play();
 
-		char choice{};
 		std::cout << "Play again? (y/n): ";
 		std::cin >> choice;
 
