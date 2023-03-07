@@ -9,7 +9,8 @@ Game::Game():
 	m_alphabet{ "abcdefghijklmnopqrstuvwxyz" },
 	m_solution{ },
 	m_guess{},
-	m_n_correct{}
+	m_n_correct{},
+	m_hint_cnt{ 1 }
 {
 	
 	const int MIN_LETTERS = 2;
@@ -17,7 +18,7 @@ Game::Game():
 	const int MIN_POSITIONS = 3;
 	const int MAX_POSITIONS = 10;
 
-	Game::instructions();
+	//Game::instructions();
 
 	while (true) {
 
@@ -134,7 +135,26 @@ void Game::score() {
 	}
 }
 
-void Game::showOptions() {
+void Game::handleFlag(char c) {
+	if (c == 'h')
+		showHint();
+	else if (c == 's')
+		showHistory();
+	else if (c == '?')
+		showHelp();
+	else if (c == 'q')
+		return;		// quit 
+}
+
+void Game::showHistory() {
+	for (auto& guess : m_guess_history){
+		for (auto& c : guess)
+			std::cout << c << ", ";
+		std::cout << std::endl;
+	}
+}
+
+void Game::showHelp() {
 	std::cout << "-h Hint\n";
 	std::cout << "-s Show history\n";
 	std::cout << "-? Help\n";
@@ -143,6 +163,8 @@ void Game::showOptions() {
 
 void Game::play() {
 
+	std::string new_guess{};
+
 	while (true) {
 
 		while (true) {
@@ -150,36 +172,50 @@ void Game::play() {
 				<< m_how_many_positions << " letters between " <<
 				m_alphabet[0] << " and " << m_alphabet[m_how_many_letters - 1] << ": ";
 
-			//std::cin >> m_guess;
-			for (int i{}; i < m_how_many_positions; ++i)
-				std::cin >> m_guess[i];
+			std::cin >> new_guess;
 
-			if (m_guess[0] == '-' && m_guess[1] == '?')
-				showOptions(); 
+			if (new_guess[0] == '-')
+				handleFlag(new_guess[1]);
 			
 			break; 
 
 		}
-		score();
 
-		std::cout << "Your guess: ";
-		for (auto& c : m_guess)
-			std::cout << c << ' ';
-		std::cout << '\t' << m_n_correct << " correct, " << m_n_in_position << " in position.\n";
+		for (int i{}; i < new_guess.size(); ++i)
+			m_guess[i] = new_guess[i];
+
+		score();
+		display();
+		m_guess_history.push_back(m_guess);
 
 		if(m_n_in_position == m_solution.size()){
-			std::cout << "You win!  And it only took " << m_round << " guesses.\n";
+			std::cout << "You win!  And it ";
+
+			if (m_round <= 6)
+				std::cout << "only ";
+
+			std::cout << " took you " << m_round << " guesses.\n";
 			break; 
 		}
 	}
 
 }
 
-void Game::getHint() {
+void Game::display()const{
+		std::cout << "Your guess: ";
+		for (auto& c : m_guess)
+			std::cout << c << ' ';
+		std::cout << '\t' << m_n_correct << " correct, " << m_n_in_position << " in position.\n";
+}
+
+void Game::showHint() {
 	std::cout << "hint: ";
-	for (auto& c : m_solution)
-		std::cout << c << ", ";
+
+	for (int i{}; i < m_hint_cnt && i < m_solution.size(); ++i)
+		std::cout << m_solution[i] << ", ";
 	std::cout << std::endl; 
+
+	m_hint_cnt++;
 }
 
 Game::~Game() {}

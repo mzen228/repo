@@ -11,10 +11,10 @@ class Game
 	std::vector<char> m_solution; 
 	std::string m_alphabet;
 	std::vector<char> m_guess; 
-	std::vector<char> m_guess_history; 
+	std::vector<std::vector<char>> m_guess_history; 
 	int m_n_correct; 
 	int m_n_in_position; 
-	std::string m_display_word;
+	int m_hint_cnt;
 public:
 	Game();
 	~Game();
@@ -23,8 +23,10 @@ public:
 	void generateSolution();
 	std::vector<char> getSolution()const { return m_solution; }
 	void display()const;
-	void showOptions();
+	void handleFlag(char);
 	void score(); 
-	void getHint(); 
+	void showHint();
+	void showHistory();
+	void showHelp();
 };
 
