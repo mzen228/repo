@@ -7,7 +7,7 @@
 #include "Guess.h"
 
 int main() {
-
+	
 	while (true) {
 		Game game;
 		game.play();

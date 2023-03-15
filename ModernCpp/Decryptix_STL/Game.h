@@ -1,4 +1,5 @@
 #pragma once
+#include "Guess.h"
 #include <string>
 #include <vector>
 
@@ -10,8 +11,10 @@ class Game
 	int m_round;
 	std::vector<char> m_solution; 
 	std::string m_alphabet;
-	std::vector<char> m_guess; 
-	std::vector<std::vector<char>> m_guess_history; 
+	//std::vector<char> m_guess; 
+	Guess m_guess;
+	//std::vector<std::vector<char>> m_guess_history; 
+	std::vector<Guess> m_guess_history;
 	int m_n_correct; 
 	int m_n_in_position; 
 	int m_hint_cnt;

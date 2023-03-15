@@ -1,3 +1,4 @@
+#include "Guess.h"
 #include "Game.h"
 #include <iostream>
 
@@ -37,7 +38,7 @@ Game::Game():
 			std::cin >> m_how_many_positions;
 
 			if (m_how_many_positions >= MIN_POSITIONS && m_how_many_positions <= MAX_POSITIONS) {
-				m_guess.resize(m_how_many_positions);
+				//m_guess.resize(m_how_many_positions); // is this okay to comment out? 
 				break;
 			}
 		}
@@ -119,14 +120,16 @@ void Game::score() {
 	m_n_in_position = 0;
 	std::vector<char> solution{m_solution};
 
-	for (int i{}; i < m_guess.size(); ++i) {
-		if (m_guess[i] == solution[i])
+	auto guess = m_guess.getString(); 
+
+	for (int i{}; i < m_how_many_positions; ++i){
+		if (guess[i] == solution[i])
 			m_n_in_position++; 
 	}
 
-	for (int i{}; i < m_guess.size(); ++i) {
+	for (int i{}; i < m_how_many_positions; ++i) {
 
-		auto it = std::find(solution.begin(), solution.end(), m_guess[i]);
+		auto it = std::find(solution.begin(), solution.end(), guess[i]);
 
 		if (it != solution.end()) {
 			m_n_correct++;
@@ -148,9 +151,7 @@ void Game::handleFlag(char c) {
 
 void Game::showHistory() {
 	for (auto& guess : m_guess_history){
-		for (auto& c : guess)
-			std::cout << c << ", ";
-		std::cout << std::endl;
+		std::cout << guess << std::endl;
 	}
 }
 
@@ -173,7 +174,6 @@ bool Game::isValid(const std::string& str) {
 			return false;
 		}
 	}
-
 
 	return true;
 }
@@ -198,13 +198,14 @@ void Game::play() {
 			
 			if (isValid(new_guess))
 				break;
-
+			else
+				std::cout << "Invalid guess.\n";
 		}
 
-		for (int i{}; i < new_guess.size(); ++i)
-			m_guess[i] = new_guess[i];
-
+		m_guess.setString(new_guess);
 		score();
+		m_guess.setNumPosition(m_n_in_position);
+		m_guess.setNumCorrect(m_n_correct);
 		display();
 		m_guess_history.push_back(m_guess);
 
@@ -223,10 +224,7 @@ void Game::play() {
 }
 
 void Game::display()const{
-		std::cout << "Your guess: ";
-		for (auto& c : m_guess)
-			std::cout << c << ' ';
-		std::cout << '\t' << m_n_correct << " correct, " << m_n_in_position << " in position.\n";
+	std::cout << "Your guess: " << m_guess << std::endl;
 }
 
 void Game::showHint() {

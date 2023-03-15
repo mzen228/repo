@@ -16,9 +16,9 @@ Guess::Guess(const Guess& rhs) :
 {
 }
 
-Guess::Guess() :m_string{},
-m_score{} 
-{}
+//Guess::Guess() :m_string{},
+//m_score{} 
+//{}
 
 Guess::~Guess() {
 }
@@ -38,5 +38,9 @@ Guess& Guess::operator=(const Guess& rhs) {
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Guess& m_guess) {
+	for (auto& c : m_guess.m_string)
+		ostr << c << ' ';
+	ostr << '\t' << m_guess.m_score.first << " in position, ";
+	ostr << m_guess.m_score.second << " correct";
 	return ostr;
 }
