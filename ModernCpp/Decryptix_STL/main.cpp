@@ -7,12 +7,13 @@
 #include "Guess.h"
 
 int main() {
-	
+
 	while (true) {
 		Game game;
 		game.play();
 
 		std::cout << "Play again? (y/n): ";
+		char choice{};
 		std::cin >> choice;
 
 		if (choice == 'y' || choice == 'Y')

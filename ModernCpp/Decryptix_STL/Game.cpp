@@ -161,6 +161,23 @@ void Game::showHelp() {
 	std::cout << "-q quit\n";
 }
 
+bool Game::isValid(const std::string& str) {
+
+	if (str.size() != m_how_many_positions)
+		return false;
+
+	for (auto& c : str) {
+		int ascii_c = c - 'a';
+
+		if (ascii_c >= m_how_many_letters) {
+			return false;
+		}
+	}
+
+
+	return true;
+}
+
 void Game::play() {
 
 	std::string new_guess{};
@@ -179,7 +196,8 @@ void Game::play() {
 				continue;
 			}
 			
-			break; 
+			if (isValid(new_guess))
+				break;
 
 		}
 

@@ -28,5 +28,6 @@ public:
 	void showHint();
 	void showHistory();
 	void showHelp();
+	bool isValid(const std::string&);
 };
 
