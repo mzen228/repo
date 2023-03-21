@@ -1,0 +1,182 @@
+Smart pointers 
+
+Issues with raw pointers 
+
+What are smart pointer?
+
+Cocnept of ownership and RAII 
+
+C++ smart pointers 
+	- unique pointers
+
+	- shared pointers
+
+	- weak pointers (but I thought a weak pointer wasn't a smart pointer?)
+
+custom deleters 
+
+... some issues with raw pointers ... 
+
+want to use smart pointers whenver possible to help us manage memory 
+
+c++ provides absolute flexibility with memory managment 
+	- allocation 
+
+	- deallocation
+
+	lifetime management 
+
+some potentially serious problems
+	unintialized (wild) pointers 
+
+	memory leakes 
+
+	dangling pointers
+
+	not exception safe
+
+ownership?
+	who owns the pointer?
+
+	when should a pointer be deleted?
+
+... what is a smart pointer?  ownership and RAII ...
+
+what are they?
+
+	-objects 
+
+	- cna only point to heap-allocated memory 
+
+	automatically call delete when no longer needed
+
+	adhere to RAII principles
+
+	c++ smart pointers 
+		unique pointers
+
+		shared pointers
+
+		weak pointers
+
+		auto pointers (deprecated; will not discuss)
+
+what are they? 
+
+	#include <memory>
+
+	defined by class templates
+		wrapped aorund a raw pointer
+
+		overloaded operators 
+			dereference (*)
+
+			member selectoin (->)
+
+			pointer arithmetic not supported (++,--,etc.)
+
+		can have custom deleters 
+
+RAII - resource acquisition is initialization
+
+	common idiom or pattern used in software design based on container object lifetime
+
+	RAII objects are allocated on the stack
+
+	resource acquisition
+		open a file 
+
+		allocate memory
+
+		acquire a lock
+
+	is initialization
+		the resource is acquired in a constructor 
+
+	resource relinquishing
+		happens in the destructor
+			close the file 
+
+			deallocate the memory
+
+			release the lock
+
+
+... unique ptr ...
+
+simple smart pointer - very efficient!
+
+unique_ptr<T> 
+	points to an object of type T on the heap 
+
+	it is unique - there can only be one unique_ptr<T> pointing to the object on the heap 
+
+	owns what it points to 
+
+	cannot be assigned or copied
+
+	can be moved
+
+	when the pointer is destroyed, what it points to is automatically destroyed
+
+... shared ptr ....
+
+provides shared ownerhsip of heap objects 
+
+shared_ptr<T> 
+	points to an object of type T on the heap 
+
+	it is not unique - there can be many shared_ptrs pointing to the same object on the heap
+
+	establishes shared ownership relationship 
+
+	can be assigned and copied 
+
+	can be moved 
+
+	doesn't support managing arrays by default 
+
+	when the use count is zero, the managedo bject on the heap is destroyed 
+
+... weak pointers ...
+
+provids a non-owning "weak" reference 
+
+weak_ptr<T>
+	points to an object of type T on the heap 
+
+	does not participate in owning relationship 
+
+	always created from a shared_ptr 
+
+	does not increment or decrement the reference use count 
+
+	used to preven strong reference cyles which could prevent objects from being deleted 
+
+weak_ptr - circular or cyclic reference
+
+A refers to B
+
+B refers to A
+
+shared strong ownership prevents heap deallocation 
+
+solution - make one of the pointers non-owning or "weak"
+
+now heap storage is deallocated properly 
+
+... deleters ... 
+
+sometimes when we destroy a smart pointer we need more than to just destroy the object on the heap 
+
+these are special use-cases 
+
+c++ smart pointers allow you to provide custome deleters 
+
+lots of way to achieve this:
+	functions 
+
+	lambdas 
+
+	other 
+

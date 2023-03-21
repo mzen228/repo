@@ -1,0 +1,29 @@
+...AVL Trees...
+
+Height-balanced binary search trees
+
+How is the height of a tree balanced?  Using a balance factor
+
+Balance factors = height of left subtree - height of right subtree
+
+balance factors is calculated on every node of a binary search tree
+
+the balance factors of every node must be {-1,0,1} to be balanced
+
+{-1,0,1} are the only valid balance factors for balanced tres
+
+If the balance factors is greater than absolute valueo f 1 then the node is imbalanced
+
+If any one node is imbalanced then the entire tree is considered to be 
+imbalanced 
+
+...Inseting AVL with rotations...
+1. LL-rotation
+2. RR-rotation
+3. LR-rotation
+4. RL-rotation
+
+Rotations at the time of insertion (the time of creation of the tree)
+
+Insertions can cause tree imbalances.  To balance the tree, you can rotate the tree. 
+
