@@ -6,6 +6,7 @@ class Human : public Decrypter
 	std::vector<char> m_solution;
 	void showHint();
 	virtual void showHelp() override;
+	void showSolution() const;
 public:
 	Human(bool duplicates); 
 	virtual ~Human();

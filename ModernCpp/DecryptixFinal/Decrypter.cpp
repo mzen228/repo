@@ -7,7 +7,9 @@ Decrypter::Decrypter(bool has_duplicates) :
 Decrypter::~Decrypter() {}
 
 void Decrypter::display(std::vector<char> vec)const {
-	std::copy(vec.begin(), vec.end(), std::ostream_iterator<char>(std::cout, " "));
+	std::copy(vec.begin(), vec.end(), 
+		std::ostream_iterator<char>(std::cout, " "));
+	//std::cout << std::endl; 
 }
 
 void Decrypter::showHistory() {

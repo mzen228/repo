@@ -24,6 +24,10 @@ Game::Game()
 
 			if (m_how_many_letters >= MIN_LETTERS && m_how_many_letters <= MAX_LETTERS)
 				break;
+			else {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
 		}
 
 		while (true) {
@@ -33,6 +37,10 @@ Game::Game()
 
 			if (m_how_many_positions >= MIN_POSITIONS && m_how_many_positions <= MAX_POSITIONS) {
 				break;
+			}
+			else {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		}
 

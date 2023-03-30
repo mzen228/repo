@@ -32,7 +32,10 @@ bool Human::handleFlag(char flag) {
 		showHelp();
 		break; 
 	case '!':
-		display(getSolution());
+		showSolution(); 
+		break; 
+	case 's':
+		showHistory();
 		break; 
 	case 'q':
 		quit = true;
@@ -43,6 +46,12 @@ bool Human::handleFlag(char flag) {
 	}
 
 	return quit; 
+}
+
+void Human::showSolution()const {
+	std::cout << "Solution: ";
+	display(getSolution());
+	std::cout << std::endl;
 }
 
 /// <summary>
@@ -117,6 +126,8 @@ void Human::play() {
 		display(current_guess); 
 		score(current_guess, num_correct, num_position); 
 		std::cout << "\t\t" << num_correct << " correct in " << num_position << " positions.\n";
+		Guess guess_obj(current_guess, num_correct, num_position);
+		m_history.push_back(guess_obj);
 	}
 
 	if (!quit) {
@@ -163,15 +174,17 @@ void Human::showHelp() {
 	std::cout << "\t-h Hint\n";
 	std::cout << "\t-s Show history\n";
 	std::cout << "\t-? Help\n";
+	std::cout << "\t-! Show solution\n";
 	std::cout << "\t-q quit\n";
 }
 
 void Human::showHint() {
 	
-	m_hint_ctr++;
+	if(m_hint_ctr<Game::m_how_many_positions)
+		m_hint_ctr++;
 
 	std::cout << "Hint: ";
-	for (int i{}; i < m_hint_ctr && i < Game::m_how_many_positions; ++i) {
+	for (int i{}; i < m_hint_ctr; ++i) {
 		std::cout << m_solution[i];
 		if (i != m_hint_ctr - 1)
 			std::cout << ", ";
