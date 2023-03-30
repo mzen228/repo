@@ -12,49 +12,13 @@ int Game::m_how_many_positions{};
 
 Game::Game()
 {
-
 	//instructions(); 
 
 	while (true) {
 
-		while (true) {
-			std::cout << "How many letters? (";
-			std::cout << MIN_LETTERS << "-" << MAX_LETTERS << "): ";
-			std::cin >> m_how_many_letters;
-
-			if (m_how_many_letters >= MIN_LETTERS && m_how_many_letters <= MAX_LETTERS)
-				break;
-			else {
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			}
-		}
-
-		while (true) {
-			std::cout << "How many positions? (";
-			std::cout << MIN_LETTERS << "-" << MAX_POSITIONS << "): ";
-			std::cin >> m_how_many_positions;
-
-			if (m_how_many_positions >= MIN_POSITIONS && m_how_many_positions <= MAX_POSITIONS) {
-				break;
-			}
-			else {
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			}
-		}
-
-		char choice{}; 
-		while (true) {
-
-			std::cout << "Allow duplicates (y/n)? ";
-			std::cin >> choice;
-
-			if (choice == 'y' || choice == 'n')
-				break;
-		}
-
-		m_duplicates_allowed = (choice == 'y') ? true : false;
+		getNumLetters(); 
+		getNumPositions(); 
+		allowDuplicates();
 
 		if (!m_duplicates_allowed && m_how_many_positions > m_how_many_letters) {
 			std::cout << "I can't put " << m_how_many_letters << " letters in " << m_how_many_positions
@@ -62,15 +26,7 @@ Game::Game()
 			continue;
 		}
 
-		while (true) {
-
-			std::cout << "Who guesses.  (H)uman or (C)omputer? (h/c)? ";
-			std::cin >> choice;
-
-			if (choice == 'h' || choice == 'c')
-				break;
-		}
-
+		char choice = getDecrypter();
 		bool ok = (choice == 'h') ? true : verifyComputerChoices();
 
 		if (ok) {
@@ -83,6 +39,75 @@ Game::Game()
 			break;
 		}
 	}
+}
+
+void Game::getNumLetters() {
+	while (true) {
+		std::cout << "How many letters? (";
+		std::cout << MIN_LETTERS << "-" << MAX_LETTERS << "): ";
+
+		std::cin >> m_how_many_letters;
+
+		if (m_how_many_letters >= MIN_LETTERS && m_how_many_letters <= MAX_LETTERS)
+			break;
+		else {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	}
+
+}
+
+void Game::getNumPositions() {
+	while (true) {
+		std::cout << "How many positions? (";
+		std::cout << MIN_LETTERS << "-" << MAX_POSITIONS << "): ";
+
+		std::cin >> m_how_many_positions;
+
+		if (m_how_many_positions >= MIN_POSITIONS && m_how_many_positions <= MAX_POSITIONS) {
+			break;
+		}
+		else {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	}
+}
+
+void Game::allowDuplicates() {
+	char choice{};
+	while (true) {
+		std::cout << "Allow duplicates (y/n)? ";
+		std::cin >> choice;
+
+		if (choice == 'y' || choice == 'n')
+			break;
+		else {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	}
+
+	m_duplicates_allowed = (choice == 'y') ? true : false;
+}
+
+char Game::getDecrypter() {
+	char choice{};
+	while (true) {
+
+		std::cout << "Who guesses.  (H)uman or (C)omputer? (h/c)? ";
+		std::cin >> choice;
+
+		if (choice == 'h' || choice == 'c')
+			break;
+		else {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	}
+
+	return choice;
 }
 
 void Game::play() {
@@ -125,12 +150,11 @@ bool Game::verifyComputerChoices() {
 	int total_seconds{ total_guesses / GUESSES_PER_SECOND };
 
 	if (total_seconds > 2) {
-		std::cout << "\nYou are asking me to guess from a possible " << total_guesses << " combinations.";
+		std::cout << "You are asking me to guess from a possible " << total_guesses << " combinations.";
 		std::cout << "\nI can get through about " << GUESSES_PER_SECOND << " guesses per second.  ";
-		std::cout << "If the puzzle is tough,\na single gues could take more than ";
+		std::cout << "If the puzzle is tough,\na single guess could take more than ";
 
 		displayTime(total_seconds);
-
 
 		char confirm{};
 

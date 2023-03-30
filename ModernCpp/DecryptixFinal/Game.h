@@ -19,6 +19,10 @@ public:
 	void instructions();
 	void play();
 	bool playAgain(); 
+	void getNumLetters();
+	void getNumPositions(); 
+	char getDecrypter(); 
+	void allowDuplicates(); 
 	bool m_duplicates_allowed;
 	std::unique_ptr<Decrypter> m_dptr; 
 };
