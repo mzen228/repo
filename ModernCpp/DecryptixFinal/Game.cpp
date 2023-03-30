@@ -51,8 +51,7 @@ void Game::getNumLetters() {
 		if (m_how_many_letters >= MIN_LETTERS && m_how_many_letters <= MAX_LETTERS)
 			break;
 		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			clearInput();
 		}
 	}
 
@@ -69,8 +68,7 @@ void Game::getNumPositions() {
 			break;
 		}
 		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			clearInput();
 		}
 	}
 }
@@ -84,8 +82,7 @@ void Game::allowDuplicates() {
 		if (choice == 'y' || choice == 'n')
 			break;
 		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			clearInput();
 		}
 	}
 
@@ -102,12 +99,16 @@ char Game::getDecrypter() {
 		if (choice == 'h' || choice == 'c')
 			break;
 		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			clearInput();
 		}
 	}
 
 	return choice;
+}
+
+void Game::clearInput() {
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void Game::play() {

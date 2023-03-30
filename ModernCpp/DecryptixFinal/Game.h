@@ -23,6 +23,7 @@ public:
 	void getNumPositions(); 
 	char getDecrypter(); 
 	void allowDuplicates(); 
+	void clearInput(); 
 	bool m_duplicates_allowed;
 	std::unique_ptr<Decrypter> m_dptr; 
 };
